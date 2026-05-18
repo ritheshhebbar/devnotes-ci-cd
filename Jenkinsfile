@@ -23,7 +23,7 @@ pipeline {
 
         stage('OWASP Dependency Scan') {
             steps {
-                bat '& "C:\\Users\\kssha\\Downloads\\dependency-check-12.2.2-release\\dependency-check\\bin\\dependency-check.bat" --scan . --format HTML'
+                bat 'C:\\Users\\kssha\\Downloads\\dependency-check-12.2.2-release\\dependency-check\\bin\\dependency-check.bat --scan . --format HTML'
             }
         }
 
