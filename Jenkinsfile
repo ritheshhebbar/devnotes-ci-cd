@@ -27,6 +27,19 @@ pipeline {
             }
         }
 
+        stage('Publish OWASP Report') {
+    steps {
+        publishHTML(target: [
+            allowMissing: false,
+            alwaysLinkToLastBuild: true,
+            keepAll: true,
+            reportDir: '.',
+            reportFiles: 'dependency-check-report.html',
+            reportName: 'OWASP Report'
+        ])
+    }
+}
+
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t %DOCKERHUB%/%IMAGE_NAME% .'
