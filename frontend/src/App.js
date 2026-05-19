@@ -6,35 +6,58 @@ function App() {
   const [text, setText] = useState("");
   const [notes, setNotes] = useState([]);
 
+  // BACKEND URL
   const API = "https://devnotes-ci-cd.onrender.com/notes";
 
+  // Fetch notes
   const fetchNotes = async () => {
-    const res = await axios.get(API);
-    setNotes(res.data);
+    try {
+      const res = await axios.get(API);
+      setNotes(res.data);
+    } catch (err) {
+      console.error("Fetch Error:", err);
+    }
   };
 
   useEffect(() => {
     fetchNotes();
   }, []);
 
+  // Add note
   const addNote = async () => {
 
     if (!text.trim()) return;
 
-    await axios.post(API, { text });
+    try {
 
-    setText("");
+      await axios.post(API, { text });
 
-    fetchNotes();
+      setText("");
+
+      fetchNotes();
+
+    } catch (err) {
+      console.error("Add Error:", err);
+    }
   };
 
+  // Delete note
   const deleteNote = async (id) => {
-    await axios.delete(`${API}/${id}`);
-    fetchNotes();
+
+    try {
+
+      await axios.delete(`${API}/${id}`);
+
+      fetchNotes();
+
+    } catch (err) {
+      console.error("Delete Error:", err);
+    }
   };
 
   return (
     <div style={{ padding: "30px" }}>
+
       <h1>DevNotes</h1>
 
       <textarea
@@ -54,18 +77,25 @@ function App() {
       <hr />
 
       {notes.map((note) => (
-        <div key={note._id} style={{
-          border: "1px solid gray",
-          padding: "10px",
-          marginBottom: "10px"
-        }}>
+
+        <div
+          key={note._id}
+          style={{
+            border: "1px solid gray",
+            padding: "10px",
+            marginBottom: "10px"
+          }}
+        >
+
           <p>{note.text}</p>
 
           <button onClick={() => deleteNote(note._id)}>
             Delete
           </button>
+
         </div>
       ))}
+
     </div>
   );
 }
