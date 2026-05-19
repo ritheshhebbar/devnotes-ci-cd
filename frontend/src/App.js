@@ -40,7 +40,7 @@ function App() {
       <textarea
         rows="4"
         cols="50"
-        placeholder="Write not"
+        placeholder="Write note..."
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
