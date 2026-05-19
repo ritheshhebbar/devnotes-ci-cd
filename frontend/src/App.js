@@ -6,7 +6,7 @@ function App() {
   const [text, setText] = useState("");
   const [notes, setNotes] = useState([]);
 
-  const API = "https://devnotes-ci-cd.onrender.com/";
+  const API = "https://devnotes-ci-cd.onrender.com/notes";
 
   const fetchNotes = async () => {
     const res = await axios.get(API);
