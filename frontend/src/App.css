@@ -1,38 +1,377 @@
-.App {
-  text-align: center;
-}
+/* =========================================
+   DevNotes — App Styles
+   Premium dark theme with glassmorphism
+   ========================================= */
 
-.App-logo {
-  height: 40vmin;
+/* ---------- Animated background ---------- */
+.app-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.app-background .orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.35;
+  animation: float 18s ease-in-out infinite;
 }
 
-.App-header {
-  background-color: #282c34;
+.app-background .orb-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #6366f1, #8b5cf6);
+  top: -120px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.app-background .orb-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #06b6d4, #3b82f6);
+  bottom: -80px;
+  right: -60px;
+  animation-delay: -6s;
+}
+
+.app-background .orb-3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #f472b6, #a855f7);
+  top: 50%;
+  left: 60%;
+  animation-delay: -12s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%      { transform: translate(30px, -40px) scale(1.05); }
+  50%      { transform: translate(-20px, 20px) scale(0.95); }
+  75%      { transform: translate(15px, 35px) scale(1.02); }
+}
+
+/* ---------- Layout ---------- */
+.app-container {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
   min-height: 100vh;
+}
+
+/* ---------- Header ---------- */
+.app-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.app-header .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.app-header .logo-icon {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
+  border-radius: 12px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: 22px;
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
 }
 
-.App-link {
-  color: #61dafb;
+.app-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #c4b5fd 0%, #818cf8 40%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
 }
 
-@keyframes App-logo-spin {
+.app-header .subtitle {
+  font-size: 0.9rem;
+  color: #7c7c9a;
+  font-weight: 400;
+  margin-top: 4px;
+}
+
+/* ---------- Composer card ---------- */
+.composer-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  margin-bottom: 40px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.composer-card:focus-within {
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1),
+    0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.composer-card textarea {
+  width: 100%;
+  min-height: 110px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 16px;
+  color: #e4e4ef;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.composer-card textarea::placeholder {
+  color: #5a5a72;
+}
+
+.composer-card textarea:focus {
+  border-color: rgba(99, 102, 241, 0.35);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.composer-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.char-count {
+  font-size: 0.78rem;
+  color: #5a5a72;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.5);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-delete {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-delete:hover {
+  background: rgba(239, 68, 68, 0.18);
+  border-color: rgba(239, 68, 68, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-delete:active {
+  transform: translateY(0);
+}
+
+/* ---------- Notes section ---------- */
+.notes-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.notes-section-header h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #b0b0ca;
+  letter-spacing: -0.2px;
+}
+
+.notes-count {
+  font-size: 0.78rem;
+  color: #5a5a72;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Note card ---------- */
+.note-card {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 14px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  animation: slideIn 0.35s ease-out;
+}
+
+.note-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes slideIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(12px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.note-card-body {
+  margin-bottom: 14px;
+}
+
+.note-card-body p {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: #d0d0e4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.note-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.note-timestamp {
+  font-size: 0.74rem;
+  color: #4a4a64;
+}
+
+/* ---------- Empty state ---------- */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  animation: fadeIn 0.5s ease;
+}
+
+.empty-state .empty-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  font-size: 1.1rem;
+  color: #7c7c9a;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.empty-state p {
+  font-size: 0.85rem;
+  color: #4a4a64;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ---------- Loading state ---------- */
+.loading-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(255, 255, 255, 0.08);
+  border-top-color: #818cf8;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-state p {
+  font-size: 0.88rem;
+  color: #5a5a72;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .app-container {
+    padding: 32px 16px 60px;
+  }
+
+  .app-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .composer-card {
+    padding: 18px;
+  }
+
+  .composer-card textarea {
+    min-height: 90px;
+    padding: 12px;
   }
 }
