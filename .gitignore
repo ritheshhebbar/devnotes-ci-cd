@@ -5,3 +5,4 @@ coverage
 .scannerwork
 .dockerignore
 dependency-check-report.html
+PROJECT_WRITEUP.md
